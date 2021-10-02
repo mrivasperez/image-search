@@ -23,7 +23,6 @@ export default class App extends Component {
     return (
       <div className="ui container">
         <SearchBar onSearch={this.onSearchSubmit} />
-        Found {this.state.images.length} images.
         <ImageList images={this.state.images} />
       </div>
     );
