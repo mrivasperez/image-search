@@ -3,7 +3,10 @@ import React, { Component } from "react";
 export class ImageCard extends Component {
   constructor(props) {
     super(props);
-    // create reference to image to get the properties of the image
+
+    this.state = { spans: 0 };
+
+    // create reference to image to get the properties of the image dynamically
     this.imageRef = React.createRef();
   }
 
@@ -13,15 +16,18 @@ export class ImageCard extends Component {
   }
 
   setSpans = () => {
-    // get heigh of each ImageList
-    console.log(this.imageRef.current.clientHeight);
+    // get height of each ImageList
+    const imageHeight = this.imageRef.current.clientHeight;
+    const spans = Math.ceil(imageHeight / 10);
+    // set the spans in the state object
+    this.setState({ spans });
   };
 
   render() {
     const { alt_description, urls } = this.props.image;
 
     return (
-      <div>
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
         <img ref={this.imageRef} alt={alt_description} src={urls.regular} />
       </div>
     );
